@@ -2,7 +2,10 @@ version: "3"
 
 services:
   jenkins:
-    image: jenkins/jenkins:lts
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: jenkins
     container_name: jenkins
     privileged: true
     hostname: jenkins
@@ -12,4 +15,6 @@ services:
       - "50000:50000"
     volumes: 
      - ./.backup:/var/jenkins_home
+     - ../dev-portfolio:/home/dev-portfolio
      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
